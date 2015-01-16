@@ -1,47 +1,11 @@
 <html>
 <head>
 	<title>PubPinion - Home</title>
-
+	<link rel="stylesheet" type="text/css" href="../../../public/stylesheets/style.css">
 	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
 	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	
-    <script type="text/javascript">
-
-    	
-
-    </script>
-    <style type="text/css">
-	    *{
-	    	/*margin: 10px;*/
-	    	padding: 5px;
-	    }
-	    #login_reg{
-	    	/*display: inline;*/
-	    	margin-right: 0px;
-	    	width: 100%;
-	    }
-	    #login_div{
-	    	display: inline;
-	    	width: 40%;
-	    }
-	    #reg_div{
-	    	display: inline;
-	    	width: 40%;
-	    }
-	    #question_button{
-	    	/*float: right;*/
-	    	/*margin-bottom: 50px;*/
-	    }
-	    #popular_questions{
-	    	border: 1px solid black;
-	    	height: 400px;
-	    	width: 500px;
-	    }
-
-    </style>
 </head>
 <body>
 	<div ng-app='pubpinion'>
@@ -67,22 +31,10 @@
 			.when('/post_question', 
 				{templateUrl: 'patials/post_question.html'})
 		})
-
-		//FACTORY
-		pubpinion.factory('pubpinFactory', function(){
-			var factory = {};
-			var questions = [
-			{question: 'Is this really a question generated with angular??', img: '' }];
-			factory.get_questions = function(){ console.log('loggin in the factory.get_questions')};
-			factory.add_answer = function(){};
-			factory.reg_user = function(){};
-
-			return factory;
-		});	
 		
 		// CONTROLLERS
 		pubpinion.controller('pubpinController', function($scope, pubpinFactory){
-			
+
 			//JQUERY
 			$(document).ready(function(){
 
@@ -124,7 +76,17 @@
 			};
 		});
 
-			
+		//FACTORY
+		pubpinion.factory('pubpinFactory', function(){
+			var factory = {};
+			var questions = [
+			{question: 'Is this really a question generated with angular??', img: '' }];
+			factory.get_questions = function(){ console.log('loggin in the factory.get_questions')};
+			factory.add_answer = function(){};
+			factory.reg_user = function(){};
+
+			return factory;
+		});	
 
 	</script>
 

@@ -61,6 +61,7 @@
         $scope.add_customer = function(){ customerFactory.add_customer($scope.new_customer); };
         $scope.remove_customer = function(customer_name){ customerFactory.remove_customer(customer_name); };
         });
+    
     //FACTORIES
     miniStore.factory('miniStoreFactory', function(){
         var orderS = [
