@@ -10,35 +10,7 @@
 	
     <script type="text/javascript">
 
-    	$(document).ready(function(){
-
-    		$('#login_reg').hide();
-
-    		$('#post_question').click(function(){
-
-    		});
-
-    		$('#question_button').click(function(){
-    			$('#login_reg').slideToggle();
-    			$('#question_button').fadeOut();
-    		});
-
-    		$('login_button').click(function(){
-    			// io.emit('login', { email: '#login_email', password: '#login_password' });
-    		});
-
-    		$('reg_button').click(function(){
-    			// io.emit('registration', { email: '#reg_email', password: '#reg_password', confirm_password: '#confirm_password' });
-    		});
-
-    		$('home_button').click(function(){
-
-    		})
-
-    		$('question_button').click(function(){
-
-    		})
-    	});
+    	
 
     </script>
     <style type="text/css">
@@ -68,7 +40,7 @@
 	    	height: 400px;
 	    	width: 500px;
 	    }
-	    
+
     </style>
 </head>
 <body>
@@ -90,35 +62,69 @@
 		pubpinion.config(function($routeProvider){
 			$routeProvider
 			.when('/', 
-				{templateUrl: 'partials/home.html'})
+				{templateUrl: 'partials/home.html',
+				controller: 'pubpinController'})
 			.when('/post_question', 
 				{templateUrl: 'patials/post_question.html'})
 		})
+
+		//FACTORY
+		pubpinion.factory('pubpinFactory', function(){
+			var factory = {};
+			var questions = [
+			{question: 'Is this really a question generated with angular??', img: '' }];
+			factory.get_questions = function(){ console.log('loggin in the factory.get_questions')};
+			factory.add_answer = function(){};
+			factory.reg_user = function(){};
+
+			return factory;
+		});	
 		
 		// CONTROLLERS
-		pubpinion.controller('homeControl', function($scope, homeFactory){
-			$scope.questions = homeFactory.get_questions();
-			$scope.add_answer = function(answer, question_id){
-				homeFactory.add_answer(answer.response, question_id.asdfasfasd)
+		pubpinion.controller('pubpinController', function($scope, pubpinFactory){
+			
+			//JQUERY
+			$(document).ready(function(){
 
+	    		$('#login_reg').hide();
+
+	    		$('#post_question').click(function(){
+
+	    		});
+
+	    		$('#question_button').click(function(){
+	    			$('#login_reg').slideToggle();
+	    			$('#question_button').fadeOut();
+	    		});
+
+	    		$('login_button').click(function(){
+	    			io.emit('login', { email: '#login_email', password: '#login_password' });
+	    		});
+
+	    		$('reg_button').click(function(){
+	    			io.emit('registration', { email: '#reg_email', password: '#reg_password', confirm_password: '#confirm_password' });
+	    		});
+
+	    		$('home_button').click(function(){
+
+	    		})
+
+	    		$('question_button').click(function(){
+
+	    		})
+			});
+
+			$scope.load();
+			$scope.questions = pubpinFactory.get_questions();
+			$scope.add_answer = function(answer, question_id){
+				pubpinFactory.add_answer(answer.response, question_id.asdfasfasd)
 			};
 			$scope.reg_user = function(){
 
 			};
 		});
 
-		//FACTORY
-		pubpinion.factory('homeFactory', function(){
-			var factory = {};
-			var questions = [
-			{question: 'Is this really a question generated with angular??', img: '' }];
-			factory.get_questions = function(){};
-			factory.add_answer = function(){};
-			factory.reg_user = function(){};
-
-
-			return factory;
-		});		
+			
 
 	</script>
 
