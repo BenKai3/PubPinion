@@ -11,9 +11,9 @@
 	<div ng-app='pubpinion'>
 
 		<div id="menu">
-			<a href="" id="home_button">?ubPinion</a>
-			<a href="" id="post_question">Get the ?ubPinion</a>
-			<a href="" id="mypub">My?ub</a>
+			<a href="/" id="home_button">?ubPinion</a>
+			<a href="/post_question" id="post_question">Get the ?ubPinion</a>
+			<a href="/mypub" id="mypub">My?ub</a>
 		</div>
 
 		<div ng-view=""></div>
@@ -26,10 +26,11 @@
 		pubpinion.config(function($routeProvider){
 			$routeProvider
 			.when('/', 
-				{templateUrl: 'partials/home.html',
-				controller: 'pubpinController'})
+				{templateUrl: 'partials/home.html', controller: 'pubpinController'})
 			.when('/post_question', 
-				{templateUrl: 'patials/post_question.html'})
+				{templateUrl: 'partials/post_question.html', controller: 'pubpinController'}})
+			.when('/mypub', 
+				{templateUrl: 'partials/myPub.html', controller: 'pubpinController'}})
 		})
 		
 		// CONTROLLERS
@@ -64,6 +65,7 @@
 	    		$('question_button').click(function(){
 
 	    		})
+	    	//END OF JQUERY
 			});
 
 			$scope.load();
