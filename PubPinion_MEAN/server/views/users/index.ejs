@@ -3,6 +3,7 @@
 	<title>PubPinion - Home</title>
 
 	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -13,9 +14,13 @@
 
     		$('#login_reg').hide();
 
+    		$('#post_question').click(function(){
+
+    		});
+
     		$('#question_button').click(function(){
     			$('#login_reg').slideToggle();
-    			$('#question_button').text("Maybe later, maybe now?");
+    			$('#question_button').fadeOut();
     		});
 
     		$('login_button').click(function(){
@@ -63,65 +68,38 @@
 	    	height: 400px;
 	    	width: 500px;
 	    }
-
-
+	    
     </style>
-
-
-
 </head>
 <body>
-	<div ng-app='home_pubpin'>
-		<div ng-controller="homeControl">
+	<div ng-app='pubpinion'>
 
-			<div id="login_reg">
-
-				<div id="login_div">
-					<h1>Log In</h1>
-					<input type="text" name="login_email" id="login_email" placeholder="user email">
-					<input type="text" name="login_password" id="login_password" placeholder="password">
-					<button id="login_button">Let the 'Pinions fly</button>
-				</div id="reg_div">
-				<div>
-					<h1>Register</h1>
-					<input type="text" name="reg_email" id="reg_email" placeholder="your email">
-					<input type="text" name="reg_password" id="reg_password" placeholder="password">
-					<input type="text" name="password_confirm" id="password_confirm" placeholder="confirm password">
-					<button id="reg_button">Join the Pub</button>
-				</div>
-
-			</div>
-
-			<div id="menu">
-				<button id="home_button">Home</button>
-				<button id="post_question">post a question</button>
-				<button></button>
-			</div>
-
-			<h1>PubPinion.</h1>
-			<h3>Real Answers, from Real People.</h3>
-
-			<button id="question_button">Got a Question? Get the PubPinion.</button>
-
-			<div id="popular_questions">
-				<h2 id="question_title">This is the Question?</h2>
-				<img src="" alt="this is the question image" id="question_img">
-				<h1 id="question_results"> YES: 96% NO:4%</h1>
-
-			</div>
-
+		<div id="menu">
+			<a href="" id="home_button">?ubPinion</a>
+			<a href="" id="post_question">Get the ?ubPinion</a>
+			<a href="" id="mypub">My?ub</a>
 		</div>
 
-	</div>
+		<div ng-view=""></div>
 
+	</div>
 	<script type="text/javascript">
-		var home_pubpin = angular.module('home_pubpin', []);
+		var pubpinion = angular.module('pubpinion', ['ngRoute']);
+
+		//ROUTES
+		pubpinion.config(function($routeProvider){
+			$routeProvider
+			.when('/', 
+				{templateUrl: 'partials/home.html'})
+			.when('/post_question', 
+				{templateUrl: 'patials/post_question.html'})
+		})
 		
 		// CONTROLLERS
-		home_pubpin.controller('homeControl', function($scope, homeFactory){
+		pubpinion.controller('homeControl', function($scope, homeFactory){
 			$scope.questions = homeFactory.get_questions();
-			$scope.add_answer = function(){
-				homeFactory.add_answer($scope.response, $scope.user_id)
+			$scope.add_answer = function(answer, question_id){
+				homeFactory.add_answer(answer.response, question_id.asdfasfasd)
 
 			};
 			$scope.reg_user = function(){
@@ -130,13 +108,13 @@
 		});
 
 		//FACTORY
-		home_pubpin.factory('homeFactory', function(){
+		pubpinion.factory('homeFactory', function(){
 			var factory = {};
 			var questions = [
 			{question: 'Is this really a question generated with angular??', img: '' }];
 			factory.get_questions = function(){};
 			factory.add_answer = function(){};
-			factory.re_user = function(){};
+			factory.reg_user = function(){};
 
 
 			return factory;
