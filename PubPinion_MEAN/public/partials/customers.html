@@ -1,0 +1,35 @@
+<div ng-controller="customerController">
+
+	<h1>Add a new customer</h1>
+	<p>Customer Name: 
+		<input type="text" placeholder="Customer Name" ng-model="new_customer">
+		<input type="submit" value="Add" ng-click="add_customer()">
+	</p>
+
+	<input type="search" placeholder="search" ng-model="search">
+
+	<table>
+
+		<thead>
+			<th>Customer Name</th>
+			<th>Created Date</th>
+			<th>Actions</th>
+		</thead>
+
+		<tbody>
+
+			<tr ng-repeat="customer in customerS | filter: search | orderBy: 'created'">
+				<td ng-bind="customer.name">
+				</td>
+				<td>
+					{{ customer.created }}
+				</td>
+				<td>
+					<button ng-click="remove_customer(customer.name)">Remove</button>
+				</td>
+			</tr>
+		</tbody>
+		
+	</table>
+
+</div>

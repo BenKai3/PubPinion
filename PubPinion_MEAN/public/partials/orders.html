@@ -1,0 +1,46 @@
+<div ng-controller="miniStoreOrderController">
+
+	<h1>Add a new order</h1>
+	<p>Customer Name:p
+		<select ng-model="order_customer">
+		  <option value="Michael Choi">Michael Choi</option>
+		  <option value="Benji Kai Erkan">Benji Kai Erkan</option>
+		  <option value="Le Boss">Le Boss</option>
+		  <option value="Ronnie Coleman">Ronnie Coleman</option>
+		</select>
+		Product:
+		<select ng-model="order_product">
+		  <option value="Orange">Orange</option>
+		  <option value="Space Ship">Space Ship</option>
+		  <option value="Tesla S">Tesla S</option>
+		</select>
+		Order Amount:
+		<select ng-model="order_amount">
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		</select>
+		<button ng-click="add_order()">Order</button>
+	</p>
+
+	<input type="search" placeholder="search" ng-model="search">
+
+	<table>
+		<thead>
+			<th>Customer Name</th>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Date</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="order in orderS | filter: search | orderBy: 'customer'">
+				<td ng-bind="order.customer"></td>
+				<td ng-bind="order.product"></td>
+				<td ng-bind="order.amount"></td>
+				<td ng-bind="order.created"></td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
