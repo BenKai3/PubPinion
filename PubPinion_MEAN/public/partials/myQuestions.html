@@ -1,0 +1,27 @@
+<div id="asked-tabled">
+	<table>
+		<thead>
+			<th>Asked</th>
+			<th>Yes</th>
+			<th>No</th>
+			<th>Responses</th>
+		</thead>
+		<tr ng-repeat="question in questions | filter: filter_questions | orderBy: 'responses' ">
+			<td ng-bind="question.question"></td>
+			<td ng-bind="question.yes"></td>
+			<td ng-bind="question.no"></td>
+			<td ng-bind="question.responses"></td>
+		</tr>
+	</table>
+</div>
+
+<div id="answered-table">
+	<table>
+		<thead>
+			<th>Answered</th>
+			<th>Yes</th>
+			<th>No</th>
+			<th>Responses</th>
+		</thead>
+	</table>
+</div>

@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/../public/stylesheets/style2.css">
+</head>
+
+<body>
+<div ng-app='myApp'>
+	<div id = "navdiv">
+	<ul id = "navbar">
+		<li><a href="#/">?ub</a></li>
+		<li><a href="#/myquestions">MyQuestions</a></li>
+	</ul>
+	</div>
+
+	<!-- Partial -->
+	<div ng-view="">
+	</div>
+	<script>
+	var myApp = angular.module('myApp', ['ngRoute']);
+
+	myApp.config(function($routeProvider){
+		$routeProvider
+		.when('#/',{
+			templateUrl: '/../public/partials/questionsbox.html'
+		})
+		.when('/myquestions',{
+			templateUrl: '/../public/partials/myQuestions.html'
+		})
+	});
+</script>
+</div>
+
+<script>
+	var questionsModule = angular.module('questionsModule', []);
+	questionsModule.controller('questions', function($scope){
+		$scope.questions = [
+		];
+		$scope.submitAnswer = function(){
+			$scope.questions.push({
+				question: $scope.question,
+				answer: $scope.answer,
+			});
+		}
+		$scope.nextQuestion = function(){
+			//get random question from DB, render to 
+		}
+	});
+</script>
+
+<script>
+	$(document).ready(function(){
+		$("#answer_button").click(function(){
+			$("#answer-display").removeClass("hidden")
+		});
+	});
+</script>
+
+</body>
+</html>
