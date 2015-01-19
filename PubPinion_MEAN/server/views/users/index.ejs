@@ -98,8 +98,7 @@
 			factory.get_questions = function(){ console.log('loggin in the factory.get_questions')};
 			factory.add_answer = function(){};
 			factory.add_user = function(new_user){
-				var user_id = user_id; //some way of making a unique id, maybe a counter of sorts
-
+				var user = new User({name: new_user.user_name, email: new_user.reg_email, })
 			};
 
 			return factory;

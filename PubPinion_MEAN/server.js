@@ -8,14 +8,14 @@ app.configure(function() {
 
     var cookieParser = require('cookie-parser');
 
-    app.use(express.cookieParser());
+    // app.use(express.cookieParser());
 
     // app.use(express.session( { secret: 'ninja' }));
 
     //require bodyParser since we need to handle post data for adding a user
-    var bodyParser = require('body-parser');
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json);
+    // var bodyParser = require('body-parser');
+    // app.use(bodyParser.urlencoded({extended: true}));
+    // app.use(bodyParser.json);
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -31,18 +31,18 @@ app.configure(function() {
     app.set('view engine', 'ejs');
 
     //route root
-    app.get('/', function(req, res){
+    // app.get('/', function(req, res){
         //this is where we get users from database and send them to the index view to be displayed.
         //how to integrate this with angular?
-        res.render('index');
-    })
+        // res.render('index');
+    // })
 
     //route to add new user
-    app.post('/users', function(req, res){
-        console.log("POST DATA: ", req.body);
+    // app.post('/users', function(req, res){
+    //     console.log("POST DATA: ", req.body);
         //this is where we would add the user from req.body to the database.
-        res.redirect('/');
-    })
+        // res.redirect('/');
+    // })
 });
 
 var debug = require('debug')('mvc_template_Martin');
