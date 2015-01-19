@@ -4,22 +4,7 @@
 	<button id="asked_button">My ?osts</button>
 	<button id="answered_button">My 'Pinions</button>
 
-	<div id="question-box">
-		<input type="question" placeholder="?ublish your Question"><br>
-		<input type="file">
-		<h5>
-			Include Maybe?:
-			<input type="checkbox" name="sex" value="maybe">
-		</h5>
-		<button ng-click="submitAnswer()" id="answer_button">Answer</button>
-		<button ng-click="nextQuestion()" id="next_button">Next</button>
-
-		<div id="answer-display" class="hidden">
-			<p>60% Yes 40% No</p>
-		</div>
-	</div>
-
-	<div id="asked-tabled">
+		<div id="asked-tabled">
 		<table>
 			<thead>
 				<th>Asked</th>
@@ -56,4 +41,16 @@
 			</tbody>
 		</table>
 	</div>
+
+	<div id="question-box">
+		<h5>Q: <input type="question" placeholder="?ublish your Question"></h5>
+		<h5>Image (optional):<input type="file"></h5>
+		<h5>
+			Include Maybe in Answers?:
+			<input type="checkbox" name="sex" value="maybe">
+		</h5>
+		<button ng-click="submitAnswer()" id="post_question_button">?ub it!</button>
+		<p id="answer-display" class="hidden">60% Yes 40% No</p>
+	</div>
+
 </div>
