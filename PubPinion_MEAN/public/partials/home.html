@@ -5,14 +5,15 @@
 					<h1>Log In</h1>
 					<input type="text" name="login_email" id="login_email" placeholder="user email">
 					<input type="text" name="login_password" id="login_password" placeholder="password">
-					<button id="login_button">Let the 'Pinions fly</button>
+					<button ng-click="login()" id="login_button"><a href="#/myPub">Let the 'Pinions fly</a></button>
 				</div id="reg_div">
 				<div>
 					<h1>Register</h1>
+					<input type="text" name="user_name" id="user_name" placeholder="user_name">
 					<input type="text" name="reg_email" id="reg_email" placeholder="your email">
 					<input type="text" name="reg_password" id="reg_password" placeholder="password">
 					<input type="text" name="password_confirm" id="password_confirm" placeholder="confirm password">
-					<button id="reg_button">Join the ?ub</button>
+					<button ng-click="add_user" id="reg_button"><a href="#/myPub">Join the ?ub</a></button>
 					<h3>Real Answers, from Real People.</h3>
 				</div>
 			</div>
@@ -24,7 +25,11 @@
 				<h2 id="question_title">This is the Question?</h2>
 				<img src="" alt="this is the question image" id="question_img">
 				<h1 id="question_results"> YES: 96% NO:4%</h1>
-
+				<!-- <div ng-repeat="popular_question in popular_questions | orderBy: ">
+					<h2 ng-bind="popular_question.question_title" id="popular_question"></h2>
+					<img ng-bind="popular_question.question_image" src="" alt="this is the question image" id="question_img">
+					<h1 ng-bind="popular_question.results_percentage"></h1>
+				</div> -->
 			</div>
 
 		</div>

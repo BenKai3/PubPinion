@@ -1,0 +1,15 @@
+<div ng-controller="pubpinController">
+	<div id="question-box">
+		<h4>Shall we?</h4>
+		<h5>
+			<input type="radio" name="sex" value="yes"> Yes
+			<input type="radio" name="sex" value="no"> No
+		</h5>
+		<button ng-click="submitAnswer()" id="answer_button">Answer</button>
+		<button ng-click="nextQuestion()" id="next_button">Next</button>
+
+		<div id="answer-display" class="hidden">
+			<p>60% Yes 40% No</p>
+		</div>
+	</div>
+</div>

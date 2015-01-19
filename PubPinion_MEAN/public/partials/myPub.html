@@ -1,0 +1,58 @@
+<div ng-controller="pubpinController">
+	<h1>Welcome, (user_name)</h1>
+
+	<button id="asked_button">My ?osts</button>
+	<button id="answered_button">My 'Pinions</button>
+
+	<div id="question-box">
+		<h4>Shall we?</h4>
+		<h5>
+			<input type="radio" name="sex" value="yes"> Yes
+			<input type="radio" name="sex" value="no"> No
+		</h5>
+		<button ng-click="submitAnswer()" id="answer_button">Answer</button>
+		<button ng-click="nextQuestion()" id="next_button">Next</button>
+
+		<div id="answer-display" class="hidden">
+			<p>60% Yes 40% No</p>
+		</div>
+	</div>
+
+	<div id="asked-tabled">
+		<table>
+			<thead>
+				<th>Asked</th>
+				<th>Yes</th>
+				<th>No</th>
+				<th>Responses</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="question in questions | filter: filter_questions | orderBy: 'responses' ">
+					<td ng-bind="question.question"></td>
+					<td ng-bind="question.yes"></td>
+					<td ng-bind="question.no"></td>
+					<td ng-bind="question.responses"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="answered-tabled">
+		<table>
+			<thead>
+				<th>Asked</th>
+				<th>Yes</th>
+				<th>No</th>
+				<th>Responses</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="question in questions | filter: filter_questions | orderBy: 'responses' ">
+					<td ng-bind="question.question"></td>
+					<td ng-bind="question.yes"></td>
+					<td ng-bind="question.no"></td>
+					<td ng-bind="question.responses"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
