@@ -6,8 +6,11 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+#menu{
+	margin: 0 auto;
+}
 #login_reg{
-	/*display: inline;*/
+    margin: 0 auto;
 	margin-right: 0px;
 	width: 100%;
 }
@@ -20,11 +23,11 @@ body {
 	width: 40%;
 }
 #question_button{
-	/*float: right;*/
-	/*margin-bottom: 50px;*/
+	margin: 0 auto;
 }
 #popular_questions{
+	margin: 0 auto;
 	border: 1px solid black;
-	height: 400px;
+	/*height: 400px;*/
 	width: 500px;
 }

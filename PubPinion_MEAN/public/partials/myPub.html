@@ -5,10 +5,11 @@
 	<button id="answered_button">My 'Pinions</button>
 
 	<div id="question-box">
-		<h4>Shall we?</h4>
+		<input type="question" placeholder="?ublish your Question"><br>
+		<input type="file">
 		<h5>
-			<input type="radio" name="sex" value="yes"> Yes
-			<input type="radio" name="sex" value="no"> No
+			Include Maybe?:
+			<input type="checkbox" name="sex" value="maybe">
 		</h5>
 		<button ng-click="submitAnswer()" id="answer_button">Answer</button>
 		<button ng-click="nextQuestion()" id="next_button">Next</button>
