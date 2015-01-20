@@ -10,14 +10,14 @@ module.exports = function Routes(app) {
 
     app.io.route('registration', function(req, res){
 
-        console.log(req.data.name, req.data.email, req.data.password, req.data.password_confirm);
+        // console.log(req.data.name, req.data.email, req.data.password, req.data.password_confirm);
 
         var user = new User({name: req.data.name, email: req.data.email, password: req.data.password, password_confirm: req.data.password_confirm});
 
         user.save(function(err){
             if(err){
-                console.log('user not added, err: '+err);
-                console.log(err.errors.email.message);
+                console.log('\n\n\nuser not added, err: '+err + '\n\n\n');
+                // console.log(err.errors.email.message);
                 req.io.emit('err', { error: err });
             }
             else{
@@ -42,7 +42,7 @@ module.exports = function Routes(app) {
         // if (database_search.email === req.data.email && database_search.password === req.data.password){
         //     console.log('successfully logged in a user!');
         //     req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
-            };
+            });
     });
 
 
