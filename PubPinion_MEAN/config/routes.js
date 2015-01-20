@@ -9,6 +9,8 @@ var Question = mongoose.model('Question');
 module.exports = function Routes(app) {
     app.get('/', function(request, response) { users.index(request, response) });
 
+    app.io.emit
+
     app.io.route('registration', function(req, res){
 
         // console.log(req.data.name, req.data.email, req.data.password, req.data.password_confirm);
@@ -19,11 +21,11 @@ module.exports = function Routes(app) {
             if(err){
                 console.log('\n\n\nuser not added, err: '+err + '\n\n\n');
                 // console.log(err.errors.email.message);
-                req.io.emit('err', { error: err });
+                req.io.emit('failed_reg', { error: err });
             }
             else{
                 console.log('successfully added a user!');
-                req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                req.io.emit('successful_reg', { name: req.data.name, mail: req.data.email, password: req.data.password });
             };
         });
     });
@@ -32,11 +34,14 @@ module.exports = function Routes(app) {
         console.log(req.data.email, req.data.password);
 
         User.findOne({email: req.data.email, password: req.data.password}, function(err, user){
-                if(err){
-                    throw err;
+            console.log(user);
+                if(user){
+                    console.log('successful_login', user.name);
+                    req.io.emit('successful_login', { name: user.name, mail: req.data.email, password: req.data.password });
                 }
                 else{
-                    req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                    console.log('failed_login');
+                    req.io.emit('failed_login', { fail_message: "User not found. Please be sure to spell the email and password correctly" });
                 };
 
         // var database_search = db.users.find({ email: req.data.email, password: req.data.password });

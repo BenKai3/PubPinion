@@ -12,15 +12,10 @@
 <body>
 	<div ng-app='pubpinion'>
 
-			<% if(typeof(err) != 'undefined'){ %>
-					<% for(var x in err){ %>
-						<h3><%= err[x].message %></h3>
-				<%	} %>
-				<% } %>
-
 		<div id="menu">
 			<button><a href="#/" id="home_button">?ubPinion</a></button>
 			<button><a href="#/myPub" id="myPub">My?ub</a></button>
+			<div id="errors"></div>
 		</div>
 
 		<div ng-view=""></div>
@@ -30,24 +25,36 @@
 		io = io.connect();
 		var pubpinion = angular.module('pubpinion', ['ngRoute']);
 
-		io.on('successful_login', function(){
-    			console.log(successful_login);
-    			// var user_name = 
-    		})
-		io.on('err', function(err){
-	    			// console.log(err);
-	    			// console.log(err.error.errors.email.message);
-	    			console.log('ERRORS', err);
-	    			if(typeof(err) != 'undefined'){
-	    				// for(var i in err){
-	    					// if(i === 0){
-			    				for(var x in err.error.errors){
-			    					$('#menu').unbind().append("<p>"+err.error.errors[x].message+"</p>");
-			    				};
-			    			// };
-	    				// };
-	    			};
-	    		});
+		//EXPRESS.IO
+		io.on('successful_reg', function(user){
+			location.hash="#/myPub";
+			console.log(user.name);
+			$('#user_name').html("Welcome, "+user.name);
+		});
+
+		io.on('successful_login', function(user){
+    			console.log('successful_login');
+    			$('#errors').unbind().html("");
+    			location.hash="#/myPub";
+    			console.log(user.name);
+    			$('#user_name').html("Welcome, "+user.name);
+
+    	});
+
+		io.on('failed_reg', function(err){
+			console.log('ERRORS', err);
+			if(typeof(err) != 'undefined'){
+				for(var x in err.error.errors){
+					$('#errors').unbind().append("<p>"+err.error.errors[x].message+"</p>");
+				};
+			};
+	    });
+
+	    io.on('failed_login', function(fail_message){
+	    	$('#errors').unbind().html("<p>"+fail_message.fail_message+"</p>");
+	    	console.log(fail_message);
+	    });
+		//END EXPRESS.IO
 
 		//ROUTES
 		pubpinion.config(function($routeProvider){
@@ -66,45 +73,34 @@
 		pubpinion.controller('pubpinController', function($scope){
 
 			//JQUERY
-		var loaded = false;
+			var loaded = false;
 			$(document).ready(function(){
-				$('#login_reg').hide();
-	    		$('#answered-tabled').hide();
-	    		$('#asked-tabled').hide();
 				if(loaded === false){
 					loaded = true;
 					first_setup();
 				}
 	    		
 	    	});
-		function first_setup(){
-		
-
+			function first_setup(){
 			
+	    		$('#post_question').click(function(){
 
-    		$('#post_question').click(function(){
+	    		});
 
-    		});
+	    		$('#question_button').unbind().click(function(){
+	    			$('#login_reg').unbind().slideToggle();
+	    			$('#question_button').unbind().fadeOut();
+	    		});
 
-    		$('#question_button').unbind().click(function(){
-    			$('#login_reg').unbind().slideToggle();
-    			$('#question_button').unbind().fadeOut();
-    		});
+	    		$('#login_button').unbind().click(function(){
+	    			io.emit('login', { email: $('#login_email').val(), password: $('#login_password').val() });
+	    			console.log('login_button was clicked: ');
+	    		});
 
-    		$('#login_button').unbind().click(function(){
-    			io.emit('login', { email: $('#login_email').val(), password: $('#login_password').val() });
-    			console.log('login_button was clicked: ');
-    		});
-
-    		
-    		
-    
-
-    		$('#reg_button').unbind().on('click', function(){
-    			console.log('reg_button was clicked: ');
-    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
-    		});
-
+	    		$('#reg_button').unbind().on('click', function(){
+	    			console.log('reg_button was clicked: ');
+	    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
+	    		});
 
 	    		// $('home_button').click(function(){
 
@@ -121,15 +117,11 @@
 	    		$('#answered_button').unbind().click(function(){
 	    			$('#answered-tabled').slideToggle()
 				});
-
 			};
-
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();	
-			
-
-	    	// END OF JQUERY
+		    // END OF JQUERY
 		});
 		// 	$scope.questions = pubpinFactory.get_questions();
 		// 	$scope.add_answer = function(answer, question_id){
@@ -138,8 +130,6 @@
 		// 	$scope.add_user = function(){
 		// 		pubpinFactory.add_user($scope.new_user);
 		// 	};
-
-		
 
 		//FACTORY
 		// pubpinion.factory('pubpinFactory', function(){
