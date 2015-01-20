@@ -24,7 +24,7 @@ module.exports = function Routes(app) {
             }
             else{
                 console.log('successfully added a user!');
-                req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                req.io.emit('successful_reg', { name: req.data.name, mail: req.data.email, password: req.data.password });
             };
         });
     });
@@ -35,8 +35,8 @@ module.exports = function Routes(app) {
         User.findOne({email: req.data.email, password: req.data.password}, function(err, user){
             console.log(user);
                 if(user){
-                    console.log('successful_login');
-                    req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                    console.log('successful_login', user.name);
+                    req.io.emit('successful_login', { name: user.name, mail: req.data.email, password: req.data.password });
                 }
                 else{
                     console.log('failed_login');

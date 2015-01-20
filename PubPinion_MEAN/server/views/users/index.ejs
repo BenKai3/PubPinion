@@ -16,7 +16,7 @@
 		<div id="menu">
 			<button><a href="#/" id="home_button">?ubPinion</a></button>
 			<button><a href="#/myPub" id="myPub">My?ub</a></button>
-			<div id="errors" style="color:red"></div>
+			<div id="errors"></div>
 		</div>
 
 		<div ng-view=""></div>
@@ -27,11 +27,21 @@
 		var pubpinion = angular.module('pubpinion', ['ngRoute']);
 
 		//EXPRESS.IO
-		io.on('successful_login', function(){
+		io.on('successful_reg', function(user){
+			location.hash="#/myPub";
+			console.log(user.name);
+			$('#user_name').html("Welcome, "+user.name);
+		});
+
+		io.on('successful_login', function(user){
     			console.log('successful_login');
-    			$('#errors').unbind().html();
-    			// var user_name = 
+    			$('#errors').unbind().html("");
+    			location.hash="#/myPub";
+    			console.log(user.name);
+    			$('#user_name').html("Welcome, "+user.name);
+
     	});
+
 		io.on('failed_reg', function(err){
 			console.log('ERRORS', err);
 			if(typeof(err) != 'undefined'){
@@ -40,6 +50,7 @@
 				};
 			};
 	    });
+
 	    io.on('failed_login', function(fail_message){
 	    	$('#errors').unbind().html("<p>"+fail_message.fail_message+"</p>");
 	    	console.log(fail_message);
