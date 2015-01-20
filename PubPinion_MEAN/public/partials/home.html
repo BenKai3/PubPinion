@@ -28,9 +28,9 @@
 				<img src="" alt="this is the question image" id="question_img">
 				<h1 id="question_results"> YES: <% yes %> NO: <% no %></h1> -->
 				<div ng-repeat="question in questions | orderBy: question">
-					<h2 ng-bind="questions.question" id="popular_question"></h2>
+					Question: <h2 ng-bind="questions.question" id="popular_question"></h2>
 					<img ng-bind="questions.image" src="" alt="this is the question image" id="question_img">
-					<h1 ng-bind="questions.percentage"></h1>
+					Percentage: <h1 ng-bind="questions.percentage"></h1>
 				</div>
 			</div>
 
@@ -38,9 +38,16 @@
 
 
 		<script>
-		//factory
-			var Questions = angular.module('Questions', []);
-			Questions.controller('Question', function($http){
-				return $http.get('/questions');
-			})
+		var users = require('./controllers/user.js');
+
+		var questions = users.getQuestions();
+
+		console.log(questions);
+
+		$scope.questions = [
+
+		];
+
+        
+
 		</script>

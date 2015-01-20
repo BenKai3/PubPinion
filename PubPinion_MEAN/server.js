@@ -32,14 +32,21 @@ app.configure(function() {
 
     //route root
 
-    app.get('/users', function(res){
         //this is where we get users from database and send them to the index view to be displayed.
         //how to integrate this with angular?
 
-        questions.findOne({id: 1}, function (err, user){
-        res.render('index');
-        })
-    })
+    // app.post("/get_question", function(req, res) {
+    //     var body = req.body;
+    //     db.getUsersByCity(body.city, function(err, data){
+    //         if (err) {
+    //             console.log(err);
+    //             return res(err);
+    //         } else {
+    //             console.log(data);
+    //             return res.json(data);
+    //         }
+    //     });
+    // });
 
     //route to add new user
     // app.post('/users', function(req, res){

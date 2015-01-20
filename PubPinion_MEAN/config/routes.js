@@ -3,6 +3,7 @@ var mongoose = require('mongoose')
 var User = mongoose.model('User');
 var Question = mongoose.model('Question');
 
+
 //  load other controllers here
 
 module.exports = function Routes(app) {
@@ -39,6 +40,25 @@ module.exports = function Routes(app) {
         console.log(req.data.email, req.data.password);
         db.users.find({ name: req.data.email, email: req.data.password });
         req.io.emit('logged_in');
+    });
+
+    app.io.route('post_question_button', function(req, res){
+        var question = new Question({question: req.data.question});
+
+        question.save(function(err){
+            if(err){
+                console.log('Question not added, err: '+err);
+                req.io.emit('err', { error: err });
+            }
+            else{
+                console.log('successfully added a question!');
+            }
+        });
+    })
+
+    app.io.route('connection', function(data){
+        //var data = db.questions.find({});
+        console.log("data");
     });
 
     // app.io.route('client_ready',    function(request) {

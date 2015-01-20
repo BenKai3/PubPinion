@@ -1,5 +1,6 @@
-// var mongoose = require('mongoose')
-// var User = mongoose.model('User');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var Question = mongoose.model('Question');
 
 module.exports = {
     index: function(request, response) {
@@ -29,5 +30,13 @@ module.exports = {
     },
     edit: function(request, response) {
         response.render('users/edit', { title:'Edit User'});
-    }
+    },
+    // getQuestions: function(request, response){
+    //     response.send('users/getQuestions', Question.findOne({}, function(err, mongoQuestions)));
+    // }
+}
+
+module.exports.getQuestions = function(){
+    questions = db.questions.find();
+    return questions;
 }
