@@ -68,22 +68,34 @@
 	    		});
 
 	    		io.on('err', function(err){
-	    			
-	    			if(err.error.errors.email.message){
-	    				if($('#menu').append("<p>"+err.error.errors.email.message+"</p>")){
-	    					exit;
-	    					$('#menu').append("<p>"+err.error.errors.email.message+"</p>");
-	    				}
+	    			console.log(err);
+	    			if(typeof(err) != 'undefined'){
+	    				for(var x in err.error.errors){
+	    					
+	    				};
+	    				$('#menu').append("<p>"+err.error.errors.email.message+"</p>");
 	    			};
-	    			if(err.error.errors.name.message){
-	    				$('#menu').append("<p>"+err.error.errors.name.message+"</p>");
-	    			}
-	    			if(err.error.errors.password.message){
-	    				$('#menu').append("<p>"+err.error.errors.password.message+"</p>");
-	    			}
-	    			if(err.error.errors.password_confirm.message){
-	    				$('#menu').append("<p>"+err.error.errors.password_confirm.message+"</p>");
-	    			}
+
+	    		io.on('successful_login', function(){
+	    			console.log(successful_login);
+	    			// var user_name = 
+	    		})
+	    			
+	    			// if(err.error.errors.email.message){
+	    			// 	if($('#menu').append("<p>"+err.error.errors.email.message+"</p>")){
+	    			// 		exit;
+	    			// 		$('#menu').append("<p>"+err.error.errors.email.message+"</p>");
+	    			// 	}
+	    			// };
+	    			// if(err.error.errors.name.message){
+	    			// 	$('#menu').append("<p>"+err.error.errors.name.message+"</p>");
+	    			// }
+	    			// if(err.error.errors.password.message){
+	    			// 	$('#menu').append("<p>"+err.error.errors.password.message+"</p>");
+	    			// }
+	    			// if(err.error.errors.password_confirm.message){
+	    			// 	$('#menu').append("<p>"+err.error.errors.password_confirm.message+"</p>");
+	    			// }
 	    					//$('#menu').append(err[x].message);	
 	    		});
 

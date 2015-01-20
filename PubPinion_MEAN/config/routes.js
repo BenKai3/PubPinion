@@ -1,12 +1,56 @@
 var users = require('./../server/controllers/users.js');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 // var User = mongoose.model('User');
 //  load other controllers here
 
 module.exports = function Routes(app) {
-    app.get('/',                    function(request, response) { users.index(request, response) });
+    app.get('/', function(request, response) { users.index(request, response) });
+
+    app.io.route('registration', function(req, res){
+
+        console.log(req.data.name, req.data.email, req.data.password, req.data.password_confirm);
+
+        var user = new User({name: req.data.name, email: req.data.email, password: req.data.password, password_confirm: req.data.password_confirm});
+
+        user.save(function(err){
+            if(err){
+                console.log('user not added, err: '+err);
+                console.log(err.errors.email.message);
+                req.io.emit('err', { error: err });
+            }
+            else{
+                console.log('successfully added a user!');
+                req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+            };
+        });
+    });
+
+    app.io.route('login', function(req){
+        console.log(req.data.email, req.data.password);
+
+        User.findOne({email: req.data.email, password: req.data.password}, function(err, user){
+                if(err){
+                    throw err;
+                }
+                else{
+                    req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                };
+
+        // var database_search = db.users.find({ email: req.data.email, password: req.data.password });
+        // if (database_search.email === req.data.email && database_search.password === req.data.password){
+        //     console.log('successfully logged in a user!');
+        //     req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+            };
+    });
+
+
+
+
+
+
+
     // app.get('/user',                function(request, response) { users.index(request, response) });
     // app.get('/users/index',         function(request, response) { users.index(request, response) });
     // app.get('/users/index.json',    function(request, response) { users.index_json(request, response) });
@@ -18,29 +62,6 @@ module.exports = function Routes(app) {
     // app.get('/users/:id',           function(request, response) { users.show(request, response) });
     // app.get('/users/:id/edit',      function(request, response) { users.edit(request, response) });
 
-    app.io.route('registration', function(req, res){
-
-        console.log(req.data.name, req.data.email, req.data.password, req.data.password_confirm);
-
-        var user = new User({name: req.data.name, email: req.data.email, password: req.data.password, password_confirm: req.data.password_confirm});
-
-        user.save(function(err){
-            if(err){
-                console.log('user not added, err: '+err);
-                req.io.emit('err', { error: err });
-            }
-            else{
-                console.log('successfully added a user!');
-            }
-        });
-    });
-
-    app.io.route('login', function(req){
-        console.log(req.data.email, req.data.password);
-        db.users.find({ name: req.data.email, email: req.data.password });
-        req.io.emit('logged_in');
-    });
-
     // app.io.route('client_ready',    function(request) {
     //     console.log('A new user connected.');
 
@@ -51,7 +72,7 @@ module.exports = function Routes(app) {
     //     app.io.broadcast('global_event', { msg: 'hello' });      
 
     //     // broadcasting an event to everyone except the person you established the socket connection to
-    //     request.io.broadcas t('event', {msg: 'hi' });        
+    //     request.io.broadcast('event', {msg: 'hi' });        
 
     //     // listening for an event
     //     app.io.route('my other event', function(data) { console.log("Received 'my other event' :", data); });  
