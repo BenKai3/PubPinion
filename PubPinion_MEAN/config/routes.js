@@ -1,8 +1,8 @@
 var users = require('./../server/controllers/users.js');
 var mongoose = require('mongoose')
 var User = mongoose.model('User');
+var Question = mongoose.model('Question');
 
-// var User = mongoose.model('User');
 //  load other controllers here
 
 module.exports = function Routes(app) {

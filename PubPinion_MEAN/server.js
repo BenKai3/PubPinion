@@ -31,11 +31,15 @@ app.configure(function() {
     app.set('view engine', 'ejs');
 
     //route root
-    // app.get('/', function(req, res){
+
+    app.get('/users', function(res){
         //this is where we get users from database and send them to the index view to be displayed.
         //how to integrate this with angular?
-        // res.render('index');
-    // })
+
+        questions.findOne({id: 1}, function (err, user){
+        res.render('index');
+        })
+    })
 
     //route to add new user
     // app.post('/users', function(req, res){

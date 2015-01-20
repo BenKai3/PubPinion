@@ -16,7 +16,7 @@ var notifier = {
 
 module.exports = {
     development: {
-        db: 'mongodb://localhost/PubPinion_db',
+        db: 'mongodb://localhost/pubpinion_db',
         root: rootPath,
         notifier: notifier,
         app: {
