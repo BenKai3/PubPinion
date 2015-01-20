@@ -7,9 +7,16 @@
 	 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
 	<script src="/socket.io/socket.io.js"></script>
+
 </head>
 <body>
 	<div ng-app='pubpinion'>
+
+			<% if(typeof(err) != 'undefined'){ %>
+					<% for(var x in err){ %>
+						<h3><%= err[x].message %></h3>
+				<%	} %>
+				<% } %>
 
 		<div id="menu">
 			<button><a href="#/" id="home_button">?ubPinion</a></button>
@@ -42,8 +49,6 @@
 			//JQUERY
 			$(document).ready(function(){
 
-				
-
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
@@ -60,6 +65,26 @@
 	    		$('#login_button').unbind().click(function(){
 	    			io.emit('login', { email: $('#login_email').val(), password: $('#login_password').val() });
 	    			console.log('hi');
+	    		});
+
+	    		io.on('err', function(err){
+	    			
+	    			if(err.error.errors.email.message){
+	    				if($('#menu').append("<p>"+err.error.errors.email.message+"</p>")){
+	    					exit;
+	    					$('#menu').append("<p>"+err.error.errors.email.message+"</p>");
+	    				}
+	    			};
+	    			if(err.error.errors.name.message){
+	    				$('#menu').append("<p>"+err.error.errors.name.message+"</p>");
+	    			}
+	    			if(err.error.errors.password.message){
+	    				$('#menu').append("<p>"+err.error.errors.password.message+"</p>");
+	    			}
+	    			if(err.error.errors.password_confirm.message){
+	    				$('#menu').append("<p>"+err.error.errors.password_confirm.message+"</p>");
+	    			}
+	    					//$('#menu').append(err[x].message);	
 	    		});
 
 	   //  		$(document).unbind().on('click', '#reg_button', function(){
@@ -88,9 +113,6 @@
 	    		$('#answered_button').unbind().click(function(){
 	    			$('#answered-tabled').slideToggle()
 				});
-
-				// $scope.load();
-
 	    		
 	    	});
 
