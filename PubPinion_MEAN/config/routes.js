@@ -46,7 +46,6 @@ module.exports = function Routes(app) {
             });
     });
 
-<<<<<<< HEAD
     app.io.route('post_question_button', function(req, res){
         var question = new Question({question: req.data.question});
 
@@ -65,7 +64,6 @@ module.exports = function Routes(app) {
         //var data = db.questions.find({});
         console.log("data");
     });
-=======
 
 
 
@@ -82,7 +80,6 @@ module.exports = function Routes(app) {
 
     // app.get('/users/:id',           function(request, response) { users.show(request, response) });
     // app.get('/users/:id/edit',      function(request, response) { users.edit(request, response) });
->>>>>>> 6cee16f680098eb2422aea8b8535b9202b58c3a4
 
     // app.io.route('client_ready',    function(request) {
     //     console.log('A new user connected.');

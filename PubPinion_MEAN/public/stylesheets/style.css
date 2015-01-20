@@ -5,6 +5,23 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url(http://31.media.tumblr.com/tumblr_mcx9kh6LvO1r9al69o1_500.jpg);
+  background-size : 100% auto;
+}
+h1{
+	background-color: #000;
+	color: white;
+}
+#question_results{
+	background-color: #BDBDBD;
+	color: black;
+}
+h2{
+	background-color: #D8D8D8;
+}
+h3{
+	background-color: #000;
+	color: white;
 }
 #menu{
 	margin: 0 auto;
@@ -22,12 +39,20 @@ body {
 	display: inline;
 	width: 40%;
 }
+button {
+	background-color: white;
+	border: 5px solid black;
+	font-size: 14px;
+	text-decoration: bold;
+}
 #question_button{
 	margin: 0 auto;
 }
 #popular_questions{
 	margin: 0 auto;
-	border: 1px solid black;
 	/*height: 400px;*/
 	width: 500px;
+}
+#question-box{
+	background-color: white;
 }
