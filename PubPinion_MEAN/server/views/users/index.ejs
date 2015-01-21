@@ -42,6 +42,8 @@
     			location.hash="#/myPub";
     			console.log(user.name);
     			$('#user_name').html("Welcome, "+user.name);
+    			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>Good to see you, buddy ;)</h3>");
+			$('#hide_instructions_button').slideDown();
 
     	});
 
