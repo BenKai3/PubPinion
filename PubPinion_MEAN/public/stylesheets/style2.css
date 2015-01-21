@@ -43,9 +43,9 @@ body {
 }
 
 /*myQuestions*/
-#answered-table{
+#answered-tabled{
 	background-color: white;
 }
-#asked-table{
-
+#asked-tabled{
+	background-color: white;
 }
