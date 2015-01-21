@@ -31,10 +31,6 @@
 			location.hash="#/myPub";
 			console.log(user.name);
 			$('#user_name').unbind().html("Welcome, "+user.name);
-<<<<<<< HEAD
-=======
-
->>>>>>> c6c3c6b568ffc525cd9ba1add0b47e6ce57a1762
 			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br><br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br><br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br><br>Now, let's submit your first 'Pinions and get this party started.</h3>");
 			$('#hide_instructions_button').slideDown();
 		});
@@ -115,11 +111,8 @@
 						first_setup();
 					}
 
-<<<<<<< HEAD
 				io.emit('load_questions');
 	    		
-=======
->>>>>>> c6c3c6b568ffc525cd9ba1add0b47e6ce57a1762
 	    	});
 
 			function first_setup(){
@@ -173,25 +166,36 @@
 					$('#welcome_heading').slideUp();
 					$('#hide_instructions_button').fadeOut();
 				})
+
+				//vote buttons
+				$('#yes').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
+				$('#no').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
 			};
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
 	    		$('#welcome_heading').hide();
-<<<<<<< HEAD
+
+
 	    		$('#hide_instructions_button').hide();	
 
-
-           
-        })
-
-=======
-	    		$('#hide_instructions_button').hide();
 	    		$('#last_question').hide();
 	    		$('#errors').hide();
->>>>>>> c6c3c6b568ffc525cd9ba1add0b47e6ce57a1762
+
+	    		$('#question_results').hide();
+
 		    // END OF JQUERY
-		//});
+		});
 		// 	$scope.questions = pubpinFactory.get_questions();
 		// 	$scope.add_answer = function(answer, question_id){
 		// 		pubpinFactory.add_answer(answer.response, question_id.asdfasfasd)
