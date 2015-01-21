@@ -2,6 +2,7 @@ var users = require('./../server/controllers/users.js');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Question = mongoose.model('Question');
+var questions = require('./../server/controllers/users.js');
 
 
 //  load other controllers here
@@ -63,11 +64,11 @@ module.exports = function Routes(app) {
         });
     })
 
-    app.io.route('get_question', function(req){
-        Question.find({question: question}, function(err, question){
-            console.log("question");
+    app.io.route('load_questions', function(req){
+        Question.find({}, function(err, question){
             if(question){
-                req.io.emit('retrieved_question', {question: question.questions});
+                req.io.emit('retrieved_question', {question1: question});
+                console.log(question);
             }
             else{
                 req.io.emit('failed_to_get_question', {message: "could not retrieve question"});

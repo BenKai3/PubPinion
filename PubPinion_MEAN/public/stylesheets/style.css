@@ -7,6 +7,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(http://31.media.tumblr.com/tumblr_mcx9kh6LvO1r9al69o1_500.jpg);
   background-size : 100% auto;
+  border: 1px dotted black;
 }
 h1{
 	background-color: #000;
