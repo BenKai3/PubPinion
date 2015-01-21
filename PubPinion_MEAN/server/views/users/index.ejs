@@ -32,12 +32,9 @@
 			location.hash="#/myPub";
 			console.log(user.name);
 			$('#user_name').unbind().html("Welcome, "+user.name);
-<<<<<<< HEAD
-			$('#welcome_heading').unbind().fadeIn().unbind().append("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br> Now, let's submit your first 'Pinions and get this party started.</h3>");
-=======
+
 			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br><br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br><br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br><br>Now, let's submit your first 'Pinions and get this party started.</h3>");
 			$('#hide_instructions_button').slideDown();
->>>>>>> 3b0545c0b3d33db183208c140f32ecbeb038fba3
 		});
 
 		io.on('successful_login', function(user){
@@ -70,8 +67,9 @@
 	    	//console.log(question1);
 	    	var i = Math.floor((Math.random() * question1.question1.length) + 0);
 	    		$('#question_title').unbind().append(question1.question1[i].question);
-	    		console.log(question1.question1[i].question);
-	    	//}
+	    		// for(var i in question1.question1){
+	    		// console.log(question1.question1[i].question);
+	    		// };
 	    });
 	    io.on('failed_to_get_question', function(message){
 	    	console.log('failed to retrieve question');
@@ -162,6 +160,7 @@
 	    		$('#welcome_heading').hide();
 	    		$('#hide_instructions_button').hide();
 	    		$('#last_question').hide();
+	    		$('#errors').hide();
 		    // END OF JQUERY
 		});
 		// 	$scope.questions = pubpinFactory.get_questions();
