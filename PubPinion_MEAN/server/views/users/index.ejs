@@ -26,6 +26,7 @@
 		var pubpinion = angular.module('pubpinion', ['ngRoute']);
 		var user_info = {};
 		//EXPRESS.IO
+		//SUCCESS registration
 		io.on('successful_reg', function(user){
 			user_info = user;
 			console.log('USER_INFO: ', user_info)
@@ -36,17 +37,22 @@
 			$('#hide_instructions_button').slideDown();
 		});
 
+		//SUCCESS login
 		io.on('successful_login', function(user){
 			user_info = user;
-    			console.log('successful_login, user_info is: ', user_info);
-    			$('#errors').unbind().html("");
-    			location.hash="#/myPub";
-    			$('#user_name').unbind().fadeIn().html("Welcome, "+user.name);
-    			$('#welcome_heading').unbind().fadeIn().html("<h3>Good to see you, buddy ;)</h3>");
+			console.log('successful_login, user_info is: ', user_info);
+			$('#errors').unbind().html("");
+			location.hash="#/myPub";
+			$('#user_name').fadeIn().html("Welcome, "+user.name);
+			$('#welcome_heading').fadeIn().html("<h3>Good to see you, buddy ;)</h3>");
 			$('#hide_instructions_button').slideDown();
-
+			for(var i in user.user_questions){
+				$('#asked_table_tbody').append(
+				"<tr><td>"+user.user_questions[i].question+"</td><td>"+user.user_questions[i].image+"</td></tr>");
+			};
     	});
 
+		//FAIL
 		io.on('failed_reg', function(err){
 			console.log('ERRORS', err);
 			if(typeof(err) != 'undefined'){
@@ -57,6 +63,7 @@
 			};
 	    });
 
+		//FAIL
 	    io.on('failed_login', function(fail_message){
 	    	$('#errors').unbind().slideUp().html("<p>"+fail_message.fail_message+"</p>").slideDown().fadeIn();
 	    	console.log(fail_message);
@@ -162,6 +169,7 @@
 	    			$('#question-box').fadeOut();
 	    		});
 
+	    		
 	    		//displays asked questions table
 	    		$('#asked_button').unbind().click(function(){
 	    			$('#asked-tabled').slideToggle();
@@ -197,29 +205,43 @@
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
 	    		$('#welcome_heading').hide();
-
-
 	    		$('#hide_instructions_button').hide();	
-
 	    		$('#last_question').hide();
 	    		$('#errors').hide();
-
 	    		$('#question_results').hide();
 
 		    // END OF JQUERY
-		    $scope.questions = pubpinFactory.get_questions();
+		 //    $scope.questions = pubpinFactory.get_questions();
+			// $scope.user_answered_questions = pubpinFactory.get_user_answered_questions();
+		 //    $scope.user_asked_questions = pubpinFactory.get_user_asked_questions();
 		});
 
-		//FACTORY
-		pubpinion.factory('pubpinFactory', function(){
-			var factory = {};
-			var questions = [{ }];
-			factory.get_questions = function(){ 
-				console.log('factory.get_questions what activated');
-				Questions.find({});
-			};
-			return factory;
-		});	
+
+		// //FACTORY
+		// pubpinion.factory('pubpinFactory', function(){
+
+		// 	var factory = {};
+		// 	var questions = [{}];
+		// 	var user_answered_questions = [{}];
+		// 	var user_asked_questions = [{}];
+
+		// 	factory.get_user_answered_questions = function(){
+		// 		console.log('get_user_answered_questions was activated');
+		// 		console.log(user_info);
+		// 		questions.find({user_name: user_info.name, user_mail: user_info.mail})
+		// 	};
+		// 	factory.get_user_ansked_questions = function(){
+		// 		console.log('get_user_ansked_questions was activated');
+		// 		console.log(user_info);
+		// 		questions.find({user_name: user_info.name, user_mail: user_info.mail})
+		// 	};
+		// 	factory.get_questions = function(){ 
+		// 		console.log('factory.get_questions was activated');
+		// 		questions.find({});
+		// 	};
+
+		// 	return factory;
+		// });	
 
 	</script>
 </body>

@@ -1,0 +1,129 @@
+		<script>
+		// CONTROLLERS
+		pubpinion.controller('pubpinController', function($scope){
+
+			//JQUERY
+			var loaded = false;
+			$(document).ready(function(){
+					if(loaded === false){
+						loaded = true;
+						first_setup();
+					}
+
+				io.emit('load_questions');
+	    		
+	    	});
+
+			function first_setup(){
+
+				io.emit('load_questions');
+
+				//My?ub button sends to My?ub partial
+				$('#myPub').unbind().click(function(){
+					location.hash="#/myPub";
+					console.log(user_info);
+				});
+
+				//sends to home partial
+				$('#home_button').unbind().click(function(){
+					location.hash="#/";
+				});
+
+				//displays login/registration fields
+	    		$('#show_login_reg_button').unbind().click(function(){
+	    			$('#login_reg').unbind().slideToggle();
+	    			$('#show_login_reg_button').unbind().fadeOut();
+	    		});
+
+	    		//login
+	    		$('#login_button').unbind().click(function(){
+	    			io.emit('login', { email: $('#login_email').val(), password: $('#login_password').val() });
+	    			console.log('login_button was clicked: ');
+	    		});
+
+	    		//registration
+	    		$('#reg_button').unbind().on('click', function(){
+	    			console.log('reg_button was clicked: ');
+	    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
+	    		});
+
+	    		//post a question from My?ub
+	    		$('#post_question_button').unbind().click(function(){
+
+	    			console.log('post_question_button was clicked and submitted this info: ASKED QUESTION: ',$('#asked_question').val(),
+	    				"MAYBE: ", $('#maybe').val(),
+	    				"IMAGE: ",$('#image_file').val(),
+	    				"USER MAIL: ", user_info.mail,
+	    				"USER NAME: ", user_info.name);
+
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('#image_file').val(), user_mail: user_info.mail, user_name: user_info.name });
+	    			$('#question-box').fadeOut();
+	    		});
+
+	    		//displays asked questions table
+	    		$('#asked_button').unbind().click(function(){
+	    			$('#asked-tabled').slideToggle();
+	    		})
+
+	    		//displays answered questions table
+	    		$('#answered_button').unbind().click(function(){
+	    			$('#answered-tabled').slideToggle()
+				});
+
+	    		//'Got it' button hides welcome message
+				$('#hide_instructions_button').click(function(){
+					$('#welcome_heading').slideUp();
+					$('#hide_instructions_button').fadeOut();
+				})
+
+				//vote buttons
+				$('#yes').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
+				$('#no').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
+			};
+				//initially hidden
+				$('#login_reg').hide();
+	    		$('#answered-tabled').hide();
+	    		$('#asked-tabled').hide();
+	    		$('#welcome_heading').hide();
+
+
+	    		$('#hide_instructions_button').hide();	
+
+	    		$('#last_question').hide();
+	    		$('#errors').hide();
+
+	    		$('#question_results').hide();
+
+		    // END OF JQUERY
+		    $scope.questions = pubpinFactory.get_questions();
+		    $scope.user_answered_questions = pubpinFactory.get_user_answered_questions();
+		    $scope.user_asked_questions = pubpinFactory.get_user_ansked_questions();
+		});
+
+		//FACTORY
+		pubpinion.factory('pubpinFactory', function(){
+			var factory = {};
+			var questions = [{}];
+			var user_answered_questions = [{}];
+			var user_asked_questions = [{}];
+			factory.get_user_answered_questions = function(){
+				console.log('get_user_answered_questions was activated');
+				console.log(user_info);
+				Questions.find({user_name: user_info.name, user_mail: user_info.mail})
+			};
+			factory.get_questions = function(){ 
+				console.log('factory.get_questions was activated');
+				Questions.find({});
+			};
+			return factory;
+		});	

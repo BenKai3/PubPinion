@@ -50,7 +50,7 @@ app.configure(function() {
     // })
 });
 
-var debug = require('debug')('mvc_template_Martin');
+var debug = require('debug')('PubPinion_MEAN');
 //require mongoose module and create mongoose variable
 var mongoose = require('./config/mongoose');
 //this is how we connect to the mongodb database using mongoose -- "PubPinion_db" is the name of our db in mongodb -- this should match the name of the db you are going to use for your project.

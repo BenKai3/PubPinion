@@ -49,3 +49,9 @@ body {
 #asked-tabled{
 	background-color: white;
 }
+thead{
+	background-color: #2098d1;
+}
+td{
+	max-width: 300px;
+}

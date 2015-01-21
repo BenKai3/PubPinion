@@ -37,8 +37,10 @@ module.exports = function Routes(app) {
         User.findOne({email: req.data.email, password: req.data.password}, function(err, user){
             console.log(user);
                 if(user){
-                    console.log('successful_login', user.name);
-                    req.io.emit('successful_login', { name: user.name, mail: req.data.email, password: req.data.password });
+                    Question.find({user_name: user.name, user_mail: user.email}, function(err, questions){
+                        console.log('successful_login', user.name, questions);
+                    req.io.emit('successful_login', { name: user.name, mail: req.data.email, password: req.data.password, user_questions: questions });
+                    });
                 }
                 else{
                     console.log('failed_login');
@@ -58,7 +60,7 @@ module.exports = function Routes(app) {
             user_mail: req.data.user_mail
         });
 
-        Question.save(function(err){
+        question.save(function(err){
             if(err){
                 console.log('Question not added, err: '+err);
                 req.io.emit('err', { error: err });

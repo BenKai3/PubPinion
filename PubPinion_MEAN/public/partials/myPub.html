@@ -13,18 +13,11 @@
 			<h3>My ?osts</h3>
 		<table>
 			<thead>
-				<th>Asked</th>
-				<th>Yes</th>
-				<th>No</th>
-				<th>Responses</th>
+				<th>| <span style="color:white">?ost</span> |</th>
+				<th>| Image |</th>
+				<th>| ?ubPinions |</th>
 			</thead>
-			<tbody>
-				<tr ng-repeat="question in questions | filter: filter_questions | orderBy: 'responses' ">
-					<td ng-bind="question.question"></td>
-					<td ng-bind="question.yes"></td>
-					<td ng-bind="question.no"></td>
-					<td ng-bind="question.responses"></td>
-				</tr>
+			<tbody id="asked_table_tbody">
 			</tbody>
 		</table>
 	</div>
@@ -33,18 +26,12 @@
 		<h3>My 'Pinions</h3>
 		<table>
 			<thead>
-				<th>Answered</th>
-				<th>Yes</th>
-				<th>No</th>
-				<th>Responses</th>
+				<th>| <span style="color:white">?ub</span> |</th>
+				<th>| My <span style="color:white">'Pinion</span> |</th>
+				<th>| Does the <span style="color:white">?ublic</span> agree? |</th>
 			</thead>
-			<tbody>
-				<tr ng-repeat="question in questions | filter: filter_questions | orderBy: 'responses' ">
-					<td ng-bind="question.question"></td>
-					<td ng-bind="question.yes"></td>
-					<td ng-bind="question.no"></td>
-					<td ng-bind="question.responses"></td>
-				</tr>
+			<tbody id="answered_table_tbody">
+
 			</tbody>
 		</table>
 	</div>

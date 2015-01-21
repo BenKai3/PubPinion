@@ -8,7 +8,7 @@ var QuestionSchema = new mongoose.Schema( {
         yes: Number,
         no: Number,
         maybe: Boolean,
-        image: Buffer,
+        image: String,
     });
 
 QuestionSchema.path('user_name').required(true, 'User name cannot be blank');
