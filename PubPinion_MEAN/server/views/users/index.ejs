@@ -120,34 +120,36 @@
 
 				io.emit('load_questions');
 
+				//My?ub button sends to My?ub partial
 				$('#myPub').unbind().click(function(){
 					location.hash="#/myPub";
 					console.log(user_info);
 				});
 
+				//sends to home partial
 				$('#home_button').unbind().click(function(){
 					location.hash="#/";
 				});
 
+				//displays login/registration fields
 	    		$('#show_login_reg_button').unbind().click(function(){
 	    			$('#login_reg').unbind().slideToggle();
 	    			$('#show_login_reg_button').unbind().fadeOut();
 	    		});
 
+	    		//login
 	    		$('#login_button').unbind().click(function(){
 	    			io.emit('login', { email: $('#login_email').val(), password: $('#login_password').val() });
 	    			console.log('login_button was clicked: ');
 	    		});
 
+	    		//registration
 	    		$('#reg_button').unbind().on('click', function(){
 	    			console.log('reg_button was clicked: ');
 	    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
 	    		});
 
-				$('#welcome_heading').hover(function(){
-					$('').slideToggle()
-				});
-
+	    		//post a question from My?ub
 	    		$('#post_question_button').unbind().click(function(){
 
 	    			console.log('post_question_button was clicked and submitted this info: ASKED QUESTION: ',$('#asked_question').val(),
@@ -160,14 +162,17 @@
 	    			$('#question-box').fadeOut();
 	    		});
 
+	    		//displays asked questions table
 	    		$('#asked_button').unbind().click(function(){
 	    			$('#asked-tabled').slideToggle();
 	    		})
 
+	    		//displays answered questions table
 	    		$('#answered_button').unbind().click(function(){
 	    			$('#answered-tabled').slideToggle()
 				});
 
+	    		//'Got it' button hides welcome message
 				$('#hide_instructions_button').click(function(){
 					$('#welcome_heading').slideUp();
 					$('#hide_instructions_button').fadeOut();
@@ -187,6 +192,7 @@
 					$('#question_results').show();
 				})
 			};
+				//initially hidden
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
@@ -201,15 +207,16 @@
 	    		$('#question_results').hide();
 
 		    // END OF JQUERY
+		    $scope.questions = pubpinFactory.get_questions();
 		});
-			$scope.questions = pubpinFactory.get_questions();
 
 		//FACTORY
 		pubpinion.factory('pubpinFactory', function(){
 			var factory = {};
 			var questions = [{ }];
 			factory.get_questions = function(){ 
-				console.log('loggin in the factory.get_questions');
+				console.log('factory.get_questions what activated');
+				Questions.find({});
 			};
 			return factory;
 		});	

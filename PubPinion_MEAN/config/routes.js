@@ -58,7 +58,7 @@ module.exports = function Routes(app) {
             user_mail: req.data.user_mail
         });
 
-        question.save(function(err){
+        Question.save(function(err){
             if(err){
                 console.log('Question not added, err: '+err);
                 req.io.emit('err', { error: err });
