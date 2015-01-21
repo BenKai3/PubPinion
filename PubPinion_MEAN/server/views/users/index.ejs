@@ -91,6 +91,8 @@
 	    	$('#last_question_question').unbind().html(question.question);
 	    	$('#last_question_image').unbind().html(question.image);
 	    	$('#last_question').fadeIn();
+	    	$('#asked_table_tbody').append(
+				"<tr><td>"+question.question+"</td><td>"+question.image+"</td></tr>");
 	    });
 
 		//END EXPRESS.IO

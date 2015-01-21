@@ -67,7 +67,10 @@ module.exports = function Routes(app) {
             }
             else{
                 console.log('successfully added a question!');
-                req.io.emit('posted_question', { question: req.data.question, image: req.data.image });
+                req.io.emit('posted_question', { 
+                    question: req.data.question, 
+                    image: req.data.image, 
+                 });
             }
         });
     })
