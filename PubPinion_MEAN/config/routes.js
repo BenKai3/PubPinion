@@ -68,10 +68,10 @@ module.exports = function Routes(app) {
     })
 
     app.io.route('load_questions', function(req){
-        Question.find({question: questions.question}, function(err, question){
+        Question.find({}, function(err, question){
             if(question){
-                req.io.emit('retrieved_question', {question: Question.question});
-                console.log(questions.question);
+                req.io.emit('retrieved_question', {question1: question});
+                console.log(question);
             }
             else{
                 req.io.emit('failed_to_get_question', {message: "could not retrieve question"});
