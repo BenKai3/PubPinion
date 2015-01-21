@@ -1,3 +1,6 @@
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+	<script src="public/javascripts/angular-file-upload-shim.min.js"></script>
+	<script src="public/javascripts/angular-file-upload.min.js"></script>
 <div ng-controller="pubpinController">
 	<h1 id="user_name"></h1>
 	<div id="welcome_heading"></div>
@@ -30,7 +33,7 @@
 		<h3>My 'Pinions</h3>
 		<table>
 			<thead>
-				<th>Asked</th>
+				<th>Answered</th>
 				<th>Yes</th>
 				<th>No</th>
 				<th>Responses</th>
@@ -48,13 +51,16 @@
 
 	<div id="question-box">
 		<h5>Q: <input type="text" name="asked_question" id="asked_question" placeholder="?ublish your Question"></h5>
-		<h5>Image (optional):<input id="image_file" type="file"></h5>
+		<h5>
+			Image (optional):<input id="image_file" type="file">
+			<!-- <button ng-file-select ng-model="myFiles">Upload Image</button> -->
+		</h5>
 		<h5>
 			Include Maybe in Answers?:
 			<input type="checkbox" name="maybe" value="maybe" id="maybe">
 		</h5>
-		<button id="post_question_button">?ub it!</button>
-		<p id="answer-display" class="hidden">60% Yes 40% No</p>
+		<button ng-click="addQuestion()" id="post_question_button">?ub it!</button>
+		
 	</div>
 	
 	<div id="last_question">

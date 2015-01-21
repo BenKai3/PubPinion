@@ -5,8 +5,10 @@ var QuestionSchema = new mongoose.Schema( {
         user_name: String, 
         user_mail: String,
         created_at: { type: Date, default: Date.now },
-        hidden: Boolean,
+        yes: Number,
+        no: Number,
         maybe: Boolean,
+        image: Buffer,
     });
 
 QuestionSchema.path('user_name').required(true, 'User name cannot be blank');

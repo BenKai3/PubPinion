@@ -32,7 +32,6 @@
 			$('#errors').unbind().html("");
 			location.hash="#/myPub";
 			$('#user_name').unbind().html("Welcome, "+user.name);
-
 			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br><br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br><br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br><br>Now, let's submit your first 'Pinions and get this party started.</h3>");
 			$('#hide_instructions_button').slideDown();
 		});
@@ -67,6 +66,10 @@
 	    	//console.log(question1);
 	    	var i = Math.floor((Math.random() * question1.question1.length) + 0);
 	    		$('#question_title').unbind().append(question1.question1[i].question);
+	    		$('#question_results').unbind().append(question1.question1[i].yes);
+	    		//console.log(question1.question1[i].question);
+	    		console.log(question1);
+	    	//}
 	    		// for(var i in question1.question1){
 	    		// console.log(question1.question1[i].question);
 	    		// };
@@ -104,11 +107,13 @@
 			//JQUERY
 			var loaded = false;
 			$(document).ready(function(){
-				if(loaded === false){
-					loaded = true;
-					first_setup();
-				}
+					if(loaded === false){
+						loaded = true;
+						first_setup();
+					}
 
+				io.emit('load_questions');
+	    		
 	    	});
 
 			function first_setup(){
@@ -167,14 +172,34 @@
 					$('#welcome_heading').slideUp();
 					$('#hide_instructions_button').fadeOut();
 				})
+
+				//vote buttons
+				$('#yes').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
+				$('#no').click(function(){
+					//io.emit('yes', {yes: yes});
+					$('#yes').hide();
+					$('#no').hide();
+					$('#question_results').show();
+				})
 			};
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
 	    		$('#welcome_heading').hide();
-	    		$('#hide_instructions_button').hide();
+
+
+	    		$('#hide_instructions_button').hide();	
+
 	    		$('#last_question').hide();
 	    		$('#errors').hide();
+
+	    		$('#question_results').hide();
+
 		    // END OF JQUERY
 		});
 			$scope.questions = pubpinFactory.get_questions();

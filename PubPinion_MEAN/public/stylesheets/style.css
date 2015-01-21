@@ -80,6 +80,10 @@ button:hover, button:focus, button:active {
 	background-color: #BDBDBD;
 	color: black;
 }
+#answer-display{
+	background-color: #BDBDBD;
+	color: black;
+}
 h2{
 	background-color: #D8D8D8;
 }
