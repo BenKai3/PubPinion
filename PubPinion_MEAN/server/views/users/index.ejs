@@ -99,10 +99,6 @@
 	    		
 	    	});
 			function first_setup(){
-			
-	    		$('#post_question').click(function(){
-
-	    		});
 
 	    		$('#question_button').unbind().click(function(){
 	    			$('#login_reg').unbind().slideToggle();
@@ -119,16 +115,12 @@
 	    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
 	    		});
 
-	    		// $('home_button').click(function(){
-
-	    		// })
-
 				$('#welcome_heading').hover(function(){
 					$('').slideToggle()
 				});
 
 	    		$('#post_question_button').click(function(){
-	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: 'image' });
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('image_file').val() });
 	    		});
 
 	    		$('#asked_button').unbind().click(function(){
