@@ -35,7 +35,7 @@ app.configure(function() {
         //this is where we get users from database and send them to the index view to be displayed.
         //how to integrate this with angular?
 
-    app.get('/todos/:id', function (req, res) {
+    app.get('/questions/:id', function (req, res) {
       Questions.find(req.params.id, function(err, Questions){
         if(err) res.send(err);
         res.json(Questions);
