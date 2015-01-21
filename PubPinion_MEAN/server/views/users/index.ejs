@@ -32,7 +32,12 @@
 			location.hash="#/myPub";
 			console.log(user.name);
 			$('#user_name').unbind().html("Welcome, "+user.name);
+<<<<<<< HEAD
 			$('#welcome_heading').unbind().fadeIn().unbind().append("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br> Now, let's submit your first 'Pinions and get this party started.</h3>");
+=======
+			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br><br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br><br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br><br>Now, let's submit your first 'Pinions and get this party started.</h3>");
+			$('#hide_instructions_button').slideDown();
+>>>>>>> 3b0545c0b3d33db183208c140f32ecbeb038fba3
 		});
 
 		io.on('successful_login', function(user){
@@ -41,6 +46,8 @@
     			location.hash="#/myPub";
     			console.log(user.name);
     			$('#user_name').html("Welcome, "+user.name);
+    			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>Good to see you, buddy ;)</h3>");
+			$('#hide_instructions_button').slideDown();
 
     	});
 
@@ -101,10 +108,6 @@
 	    		
 	    	});
 			function first_setup(){
-			
-	    		$('#post_question').click(function(){
-
-	    		});
 
 	    		$('#question_button').unbind().click(function(){
 	    			$('#login_reg').unbind().slideToggle();
@@ -121,12 +124,12 @@
 	    			io.emit('registration', { name: $('#user_name').val(), email: $('#reg_email').val(), password: $('#reg_password').val(), password_confirm: $('#password_confirm').val() });
 	    		});
 
-	    		// $('home_button').click(function(){
-
-	    		// })
+				$('#welcome_heading').hover(function(){
+					$('').slideToggle()
+				});
 
 	    		$('#post_question_button').click(function(){
-	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: 'image' });
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('image_file').val() });
 	    		});
 
 	    		$('#asked_button').unbind().click(function(){
@@ -136,10 +139,17 @@
 	    		$('#answered_button').unbind().click(function(){
 	    			$('#answered-tabled').slideToggle()
 				});
+
+				$('#hide_instructions_button').click(function(){
+					$('#welcome_heading').slideUp();
+					$('#hide_instructions_button').fadeOut();
+				})
 			};
 				$('#login_reg').hide();
 	    		$('#answered-tabled').hide();
-	    		$('#asked-tabled').hide();	
+	    		$('#asked-tabled').hide();
+	    		$('#welcome_heading').hide();
+	    		$('#hide_instructions_button').hide();	
 		    // END OF JQUERY
 		});
 		// 	$scope.questions = pubpinFactory.get_questions();

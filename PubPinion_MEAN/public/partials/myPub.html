@@ -1,6 +1,7 @@
 <div ng-controller="pubpinController">
 	<h1 id="user_name"></h1>
 	<div id="welcome_heading"></div>
+	<button id="hide_instructions_button">Got It.</button>
 
 	<button id="asked_button">My ?osts</button>
 	<button id="answered_button">My 'Pinions</button>
@@ -47,7 +48,7 @@
 
 	<div id="question-box">
 		<h5>Q: <input type="text" name="asked_question" id="asked_question" placeholder="?ublish your Question"></h5>
-		<h5>Image (optional):<input type="file"></h5>
+		<h5>Image (optional):<input id="image_file" type="file"></h5>
 		<h5>
 			Include Maybe in Answers?:
 			<input type="checkbox" name="maybe" value="maybe" id="maybe">
