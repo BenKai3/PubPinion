@@ -42,8 +42,8 @@
     			$('#errors').unbind().html("");
     			location.hash="#/myPub";
     			console.log(user.name);
-    			$('#user_name').html("Welcome, "+user.name);
-    			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>Good to see you, buddy ;)</h3>");
+    			$('#user_name').unbind().fadeIn().html("Welcome, "+user.name);
+    			$('#welcome_heading').unbind().fadeIn().html("<h3>Good to see you, buddy ;)</h3>");
 			$('#hide_instructions_button').slideDown();
 
     	});
@@ -51,15 +51,15 @@
 		io.on('failed_reg', function(err){
 			console.log('ERRORS', err);
 			if(typeof(err) != 'undefined'){
-				$('#errors').unbind().fadeOut().html("");
+				$('#errors').unbind().slideUp().html("");
 				for(var x in err.error.errors){
-					$('#errors').unbind().append("<p>"+err.error.errors[x].message+"</p>").fadeIn();
+					$('#errors').unbind().append("<p>"+err.error.errors[x].message+"</p>").slideDown();
 				};
 			};
 	    });
 
 	    io.on('failed_login', function(fail_message){
-	    	$('#errors').unbind().fadeOut().html("<p>"+fail_message.fail_message+"</p>").fadeIn();
+	    	$('#errors').unbind().slideUp().html("<p>"+fail_message.fail_message+"</p>").slideDown().fadeIn();
 	    	console.log(fail_message);
 	    });
 
