@@ -43,7 +43,7 @@
 			console.log('successful_login, user_info is: ', user_info);
 			$('#errors').unbind().html("");
 			location.hash="#/myPub";
-			$('#user_name').fadeIn().html("Welcome, "+user.name);
+			$('#user_name').fadeIn().html("Welcome, "+user.name+".");
 			$('#welcome_heading').fadeIn().html("<h3>Good to see you, buddy ;)</h3>");
 			$('#hide_instructions_button').slideDown();
 			for(var i in user.user_questions){
