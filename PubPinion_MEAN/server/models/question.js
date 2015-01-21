@@ -5,6 +5,7 @@ var QuestionSchema = new mongoose.Schema( {
         user_id: String, 
         created_at: { type: Date, default: Date.now },
         hidden: Boolean,
+        maybe: Boolean,
     });
 
 var Question = mongoose.model('Question', QuestionSchema);

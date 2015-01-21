@@ -51,8 +51,9 @@ module.exports = function Routes(app) {
             });
     });
 
-    app.io.route('post_question_button', function(req, res){
-        var question = new Question({question: req.data.question});
+    //listen for post question
+    app.io.route('post_question', function(req, res){
+        var question = new Question({question: req.data.question, maybe: req.data.maybe, image: req.data.image});
 
         question.save(function(err){
             if(err){
@@ -65,9 +66,16 @@ module.exports = function Routes(app) {
         });
     })
 
-    app.io.route('connection', function(data){
-        //var data = db.questions.find({});
-        console.log("data");
+    app.io.route('get_question', function(req){
+        Question.find({question: question}, function(err, question){
+            console.log("question");
+            if(question){
+                req.io.emit('retrieved_question', {question: question.questions});
+            }
+            else{
+                req.io.emit('failed_to_get_question', {message: "could not retrieve question"});
+            };
+        })
     });
 
 

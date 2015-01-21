@@ -58,6 +58,16 @@
 	    	$('#errors').unbind().html("<p>"+fail_message.fail_message+"</p>");
 	    	console.log(fail_message);
 	    });
+
+	    io.on('retrieved_question', function(question){
+	    	console.log(question);
+	    		$('#question_title').append(question);
+	    });
+	    io.on('failed_to_get_question', function(message){
+	    	console.log('failed to retrieve question');
+	    		$('#question_title').append(message);
+	    });
+
 		//END EXPRESS.IO
 
 		//ROUTES
@@ -110,9 +120,9 @@
 
 	    		// })
 
-	    		// $('question_button').click(function(){
-
-	    		// })
+	    		$('#post_question_button').click(function(){
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: 'image' });
+	    		});
 
 	    		$('#asked_button').unbind().click(function(){
 	    			$('#asked-tabled').slideToggle();
