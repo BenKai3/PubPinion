@@ -50,7 +50,13 @@ module.exports = function Routes(app) {
 
     //listen for post question
     app.io.route('post_question', function(req, res){
-        var question = new Question({question: req.data.question, maybe: req.data.maybe, image: req.data.image});
+        var question = new Question({
+            question: req.data.question, 
+            maybe: req.data.maybe,
+            image: req.data.image, 
+            user_name: req.data.user_name, 
+            user_mail: req.data.user_mail
+        });
 
         question.save(function(err){
             if(err){

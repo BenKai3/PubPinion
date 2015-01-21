@@ -24,13 +24,13 @@
 	<script type="text/javascript">
 		io = io.connect();
 		var pubpinion = angular.module('pubpinion', ['ngRoute']);
-
+		var user_info = {};
 		//EXPRESS.IO
 		io.on('successful_reg', function(user){
-			// $('#ng-view').fadeIn(location.hash="#/myPub");
+			user_info = user;
+			console.log('USER_INFO: ', user_info)
 			$('#errors').unbind().html("");
 			location.hash="#/myPub";
-			console.log(user.name);
 			$('#user_name').unbind().html("Welcome, "+user.name);
 
 			$('#welcome_heading').unbind().fadeIn().unbind().html("<h3>You are about to embark on a journey of unabashedly honest feedback.<br>Let's get your started.<br><br>A.) Your ?ub's are your public posts. Any user who's lucky enough to log on around the time you post it will get the chance to tell you what they think.<br><br>B.) Your 'Pinions are a record of your answers to other users ?ub's.<br><br>Now, let's submit your first 'Pinions and get this party started.</h3>");
@@ -38,10 +38,10 @@
 		});
 
 		io.on('successful_login', function(user){
-    			console.log('successful_login');
+			user_info = user;
+    			console.log('successful_login, user_info is: ', user_info);
     			$('#errors').unbind().html("");
     			location.hash="#/myPub";
-    			console.log(user.name);
     			$('#user_name').unbind().fadeIn().html("Welcome, "+user.name);
     			$('#welcome_heading').unbind().fadeIn().html("<h3>Good to see you, buddy ;)</h3>");
 			$('#hide_instructions_button').slideDown();
@@ -117,15 +117,16 @@
 
 				$('#myPub').unbind().click(function(){
 					location.hash="#/myPub";
+					console.log(user_info);
 				});
 
 				$('#home_button').unbind().click(function(){
 					location.hash="#/";
 				});
 
-	    		$('#question_button').unbind().click(function(){
+	    		$('#show_login_reg_button').unbind().click(function(){
 	    			$('#login_reg').unbind().slideToggle();
-	    			$('#question_button').unbind().fadeOut();
+	    			$('#show_login_reg_button').unbind().fadeOut();
 	    		});
 
 	    		$('#login_button').unbind().click(function(){
@@ -144,9 +145,13 @@
 
 	    		$('#post_question_button').unbind().click(function(){
 
-	    			console.log('post_question_button was clicked and submitted this info: ',$('#asked_question').val(), $('#maybe').val(), $('#image_file').val());
+	    			console.log('post_question_button was clicked and submitted this info: ASKED QUESTION: ',$('#asked_question').val(),
+	    				"MAYBE: ", $('#maybe').val(),
+	    				"IMAGE: ",$('#image_file').val(),
+	    				"USER MAIL: ", user_info.mail,
+	    				"USER NAME: ", user_info.name);
 
-	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('#image_file').val() });
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('#image_file').val(), user_mail: user_info.mail, user_name: user_info.name });
 	    			$('#question-box').fadeOut();
 	    		});
 
@@ -172,29 +177,17 @@
 	    		$('#errors').hide();
 		    // END OF JQUERY
 		});
-		// 	$scope.questions = pubpinFactory.get_questions();
-		// 	$scope.add_answer = function(answer, question_id){
-		// 		pubpinFactory.add_answer(answer.response, question_id.asdfasfasd)
-		// 	};
-		// 	$scope.add_user = function(){
-		// 		pubpinFactory.add_user($scope.new_user);
-		// 	};
+			$scope.questions = pubpinFactory.get_questions();
 
 		//FACTORY
-		// pubpinion.factory('pubpinFactory', function(){
-		// 	var factory = {};
-		// 	var questions = [
-		// 	{question: 'Is this really a question generated with angular??', img: '' }];
-		// 	factory.get_questions = function(){ 
-		// 		console.log('loggin in the factory.get_questions');
-		// 	};
-		// 	factory.add_answer = function(){};
-		// 	factory.add_user = function(new_user){
-		// 		var user = new User({name: new_user.user_name, email: new_user.reg_email, })
-		// 	};
-
-		// 	return factory;
-		// });	
+		pubpinion.factory('pubpinFactory', function(){
+			var factory = {};
+			var questions = [{ }];
+			factory.get_questions = function(){ 
+				console.log('loggin in the factory.get_questions');
+			};
+			return factory;
+		});	
 
 	</script>
 </body>
