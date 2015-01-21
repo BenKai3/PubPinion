@@ -41,13 +41,9 @@ module.exports = function Routes(app) {
                 }
                 else{
                     console.log('failed_login');
-                    req.io.emit('failed_login', { fail_message: "User not found. Please be sure to spell the email and password correctly" });
-                };
-
-        // var database_search = db.users.find({ email: req.data.email, password: req.data.password });
-        // if (database_search.email === req.data.email && database_search.password === req.data.password){
-        //     console.log('successfully logged in a user!');
-        //     req.io.emit('successful_login', { name: req.data.name, mail: req.data.email, password: req.data.password });
+                    req.io.emit('failed_login', { fail_message: "User not found. Please be sure to spell the email and password correctly" 
+                    });
+                 };
             });
     });
 
@@ -62,6 +58,7 @@ module.exports = function Routes(app) {
             }
             else{
                 console.log('successfully added a question!');
+                req.io.emit('posted_question', { question: req.data.question, image: req.data.image });
             }
         });
     })

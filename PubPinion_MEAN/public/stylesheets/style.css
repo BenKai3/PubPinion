@@ -123,3 +123,13 @@ button {
 #question-box{
 	background-color: white;
 }
+#last_question{
+	opacity: 0.7;
+	background-color: white;
+	margin: 0 auto;
+    text-align: left;
+    width: 500px;
+    border: 2px solid black;
+    padding: 20px;
+    margin-top: 50px;
+}

@@ -70,6 +70,13 @@
 	    	console.log('failed to retrieve question');
 	    		$('#question_title').append(message);
 	    });
+	    io.on('posted_question', function(question){
+	    	$('#question-box').fadeIn();
+	    	console.log('this is the info for the last_question box',question.question, question.image);
+	    	$('#last_question_question').unbind().html(question.question);
+	    	$('#last_question_image').unbind().html(question.image);
+	    	$('#last_question').fadeIn();
+	    });
 
 		//END EXPRESS.IO
 
@@ -120,7 +127,11 @@
 				});
 
 	    		$('#post_question_button').click(function(){
-	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('image_file').val() });
+
+	    			console.log('post_question_button was clicked and submitted this info: ',$('#asked_question').val(), $('#maybe').val(), $('#image_file').val());
+
+	    			io.emit('post_question', {question: $('#asked_question').val(), maybe: $('#maybe').val(), image: $('#image_file').val() });
+	    			$('#question-box').fadeOut();
 	    		});
 
 	    		$('#asked_button').unbind().click(function(){
@@ -140,7 +151,8 @@
 	    		$('#answered-tabled').hide();
 	    		$('#asked-tabled').hide();
 	    		$('#welcome_heading').hide();
-	    		$('#hide_instructions_button').hide();	
+	    		$('#hide_instructions_button').hide();
+	    		$('#last_question').hide();
 		    // END OF JQUERY
 		});
 		// 	$scope.questions = pubpinFactory.get_questions();
